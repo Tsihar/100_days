@@ -5,39 +5,7 @@
 # TODO 2.3 если денег не хватило сказать, что не хватило "Sorry that's not enough money. Money refunded." и предложить выбрать напиток заново
 # TODO 2.4 если не хватает ингридиентов вывод: "Sorry there is not enough {beverage}"
 # TODO 3 при вводе "report" показываем сколько осталось ресурсов(water, milk, coffee, money загружено в автомате на данный момент)
-MENU = {
-    "espresso": {
-        "ingredients": {
-            "water": 50,
-            "coffee": 18,
-            "milk": 0
-        },
-        "cost": 1.5,
-    },
-    "latte": {
-        "ingredients": {
-            "water": 200,
-            "milk": 150,
-            "coffee": 24,
-        },
-        "cost": 2.5,
-    },
-    "cappuccino": {
-        "ingredients": {
-            "water": 250,
-            "milk": 100,
-            "coffee": 24,
-        },
-        "cost": 3.0,
-    }
-}
-
-ingredients_start = {
-    'water': 300,
-    'milk': 200,
-    'coffee': 100,
-    'money': 0
-}
+from DAY_15.menu_data import ingredients_start, MENU
 
 
 def get_report():
@@ -52,14 +20,6 @@ def subtract_ingredients(choice):
     leftover_milk = ingredients_start['milk'] - MENU[choice]['ingredients']['milk']
     leftover_coffee = ingredients_start['coffee'] - MENU[choice]['ingredients']['coffee']
     return [leftover_water, leftover_milk, leftover_coffee]
-    # if water >= 0 and milk >= 0 and coffee >= 0:
-    #     return True
-    # elif water < 0:
-    #     return False  # print("Sorry there is not enough water.")
-    # elif milk < 0:
-    #     return False  # print("Sorry there is not enough milk.")
-    # elif coffee < 0:
-    #     return False  # print("Sorry there is not enough coffee.")
 
 
 def refund_money(quarter, dime, nickle, penny, beverage_cost):
