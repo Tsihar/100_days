@@ -1,11 +1,36 @@
-# TODO 1. предложить выбрать "What would you like? (espresso/latte/cappuccino):" + вывод "Please, insert coins"
-# TODO 2. после ввода напитка проверка на достаточность ингридиентов на его приготовление
-# TODO 2.1 если хватает просим внести монеты и предложить внести по очереди: quarters, dimes, nickles, pennies
-# TODO 2.2 вернуть сдачу, если клиент дал лишних денег "Here is {change} in change" + вывести "Here is your {beverage}. Enjoy!"
-# TODO 2.3 если денег не хватило сказать, что не хватило "Sorry that's not enough money. Money refunded." и предложить выбрать напиток заново
-# TODO 2.4 если не хватает ингридиентов вывод: "Sorry there is not enough {beverage}"
-# TODO 3 при вводе "report" показываем сколько осталось ресурсов(water, milk, coffee, money загружено в автомате на данный момент)
-from DAY_15.menu_data import ingredients_start, MENU
+MENU = {
+    "espresso": {
+        "ingredients": {
+            "water": 50,
+            "coffee": 18,
+            "milk": 0
+        },
+        "cost": 1.5,
+    },
+    "latte": {
+        "ingredients": {
+            "water": 200,
+            "milk": 150,
+            "coffee": 24,
+        },
+        "cost": 2.5,
+    },
+    "cappuccino": {
+        "ingredients": {
+            "water": 250,
+            "milk": 100,
+            "coffee": 24,
+        },
+        "cost": 3.0,
+    }
+}
+
+ingredients_start = {
+    'water': 300,
+    'milk': 200,
+    'coffee': 100,
+    'money': 0
+}
 
 
 def get_report():
@@ -29,9 +54,13 @@ def refund_money(quarter, dime, nickle, penny, beverage_cost):
 
 
 profit = 0
-is_enough_ingredients = True
-while is_enough_ingredients:
+continue_game = True
+while continue_game:
     client_choice = input("What would you like? (espresso/latte/cappuccino): ").lower()
+
+    if client_choice == "off":
+        continue_game = False
+
     if client_choice == "report":
         get_report()
         client_choice = input("What would you like? (espresso/latte/cappuccino): ").lower()
@@ -60,6 +89,10 @@ while is_enough_ingredients:
             print("Sorry that's not enough money. Money refunded.")
 
     else:
-        print("Sorry there is not enough coffee.")
-
+        if ingredients_start['water'] < MENU[client_choice]['ingredients']['water']:
+            print("Sorry there is not enough water.")
+        elif ingredients_start['milk'] < MENU[client_choice]['ingredients']['milk']:
+            print("Sorry there is not enough milk.")
+        else:
+            print("Sorry there is not enough coffee.")
 
