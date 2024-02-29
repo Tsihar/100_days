@@ -1,22 +1,21 @@
-# import turtle
+from menu import Menu, MenuItem
 
-# timmy = turtle.Turtle() #импортировали класс Turtle из модуля turtle
-# и прикрепили его к переменной timmy
+from coffee_maker import CoffeeMaker
+from money_machine import MoneyMachine
 
-from turtle import Turtle, Screen  # из модуля turtle импортим класс Turtle
+# menu_items = MenuItem()
+menu = Menu()
+coffee = CoffeeMaker()
+machine = MoneyMachine()
 
-timmy = Turtle()  # создали объект timmy класса Turtle (класс всегда с большой буквы называется в отличие от переменной)
-print(timmy)  # выход: "<turtle.Turtle object at 0x000001F04034D460>"
-# объект Turtle сохраняется в месте памяти компьютера 0x000001F04034D460, это уже ни просто стринга или int тип данных
-
-timmy.shape("turtle") #делает вместо курсора форму черпеахи
-timmy.color("chartreuse") #в скобках передаем аргумент метода color чтоб, покрасить черепаху
-timmy.forward(100)
-
-my_screen = Screen()
-print(my_screen.canvheight) #выход: значение аттрибута "300"
-# через точку идет обращение
-# к АТРИБУТУ (то что у класса есть. как обычная переменная) класса Screen объекта my_screen
-
-my_screen.exitonclick() #через точку идет обращение
-# к МЕТОДУ (то, что класс может делать, функция класса - метод) класса Screen объекта my_screen
+is_play = True
+while is_play:
+    client_choice = input("What would you like? (espresso/latte/cappuccino): ").lower()
+    if client_choice == "off":
+        is_play = False
+    elif client_choice == "report":
+        coffee.report()
+        machine.report()
+    else:
+        if coffee.is_resource_sufficient(client_choice):
+            machine.make_payment(menu.MenuItem)
