@@ -1,7 +1,7 @@
 import time
 from turtle import *
 
-from DAY_20_snake_game.snake import Snake
+from DAY_20_21_snake_INHERIT_Classes.snake import Snake
 
 screen = Screen()
 screen.setup(width=600, height=600)
