@@ -8,7 +8,7 @@ class Food(Turtle): # наследуем класс Turtle
         # благодаря наследованию, можем использовать методы класса Turtle, как например ниже
         self.shape('circle')
         self.penup()
-        self.shapesize(stretch_len=0.5, stretch_wid=0.5) # делаем круг 10*10
+        self.shapesize(stretch_len=0.7, stretch_wid=0.7) # делаем круг 10*10
         self.color('blue')
         self.speed('fastest')
         self.refresh() # мы создали метод, а не унаследовали

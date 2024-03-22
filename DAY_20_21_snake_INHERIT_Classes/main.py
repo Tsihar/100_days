@@ -3,6 +3,7 @@ import turtle
 from turtle import *
 
 from DAY_20_21_snake_INHERIT_Classes.food import Food
+from DAY_20_21_snake_INHERIT_Classes.scoreboard import Scoreboard
 from DAY_20_21_snake_INHERIT_Classes.snake import Snake
 
 screen = Screen()
@@ -14,6 +15,7 @@ screen.listen()
 
 snake = Snake()
 food = Food() # еда уже нарисуется сразу на экране после запуска
+scoreboard = Scoreboard()
 
 screen.listen()
 screen.onkey(snake.up, 'Up')
@@ -27,13 +29,19 @@ game_is_on = True
 while game_is_on: # в этом месте выполнения кода экран черный из-за tracer-a, ниже уже update отрисовывает паровоз
     screen.update()  # отрисовали весь паровоз только после движения каждого сегмента
     time.sleep(0.1)  # задерживаем, иначе код так быстро работает, что не успеваем даже увидеть змейку, так она быстро вперед убегает
+    snake.move()
 
     # определить столкновение змейки с едой
     if snake.head.distance(food) < 15: # можно поиграться с этим числом чтоб красиво было столкновение
         # print('nom nom')
+        scoreboard.count_score() # увеличиваем счет когда съедаем еду
         food.refresh()
 
-    snake.move()
+    # определить столкновение змейки со стеной
+    if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
+        game_is_on = False
+        scoreboard.game_over()
+
 
 
 

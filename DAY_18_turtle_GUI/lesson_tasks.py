@@ -1,8 +1,9 @@
-# from turtle import *
-# import random
-# timmy = Turtle()
-# timmy.shape('turtle')
-# timmy.color('green')
+from turtle import *
+import random
+timmy = Turtle()
+timmy.shape('turtle')
+timmy.color('green')
+timmy.write('Score', move=False, align='center', font=('Arial', 10, 'bold'))
 import turtle
 # Task 1. Нарисовать квадрат
 # for i in range(4):  # лучший вариант нарисовать квадрат
@@ -101,25 +102,25 @@ import turtle
 #     timmy.forward(20)
 
 # Task 5. спирограф (окружности смещенные на небольшой градус и нарисованные по кругу)
-from turtle import *
-import random
-
-timmy = turtle.Turtle()
-turtle.colormode(255)
-timmy.speed(200)
-
-
-def rand_color():
-    r = random.randint(0, 255)
-    g = random.randint(0, 255)
-    b = random.randint(0, 255)
-    return r, g, b
-
-
-for i in range(72):
-    timmy.pencolor(rand_color())
-    timmy.circle(100.0)
-    timmy.left(5)
-
+# from turtle import *
+# import random
+#
+# timmy = turtle.Turtle()
+# turtle.colormode(255)
+# timmy.speed(200)
+#
+#
+# def rand_color():
+#     r = random.randint(0, 255)
+#     g = random.randint(0, 255)
+#     b = random.randint(0, 255)
+#     return r, g, b
+#
+#
+# for i in range(72):
+#     timmy.pencolor(rand_color())
+#     timmy.circle(100.0)
+#     timmy.left(5)
+#
 screen = Screen()
 screen.exitonclick()
