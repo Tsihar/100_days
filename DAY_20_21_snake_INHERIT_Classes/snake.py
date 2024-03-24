@@ -18,12 +18,18 @@ class Snake:
         self.create_snake() # при создании объекта в конструкторе создается и сегмент змейки
         self.head = self.snake[0] # вынесли голову отдельно, т к она поворачивает всю змейку
     def create_snake(self):
-        for sn in START_POSITIONS:
-            new_snake = Turtle(shape='square')
-            new_snake.penup()
-            new_snake.color('white')
-            new_snake.goto(sn)  # используем каждый кортеж как координаты каждого сегмента змейки
-            self.snake.append(new_snake)
+        for position in START_POSITIONS:
+            self.create_segment(position)
+
+    def create_segment(self, position):
+        new_snake = Turtle(shape='square')
+        new_snake.penup()
+        new_snake.color('white')
+        new_snake.goto(position)  # используем каждый кортеж как координаты каждого сегмента змейки
+        self.snake.append(new_snake)
+
+    def extend_snake(self):
+        self.create_segment(self.snake[-1].position())
 
     def move(self):
         for move in range(len(self.snake) - 1, 0, -1):
