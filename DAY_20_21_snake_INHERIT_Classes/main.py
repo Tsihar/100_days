@@ -10,7 +10,7 @@ screen = Screen()
 screen.setup(width=600, height=600)
 screen.bgcolor('black')
 screen.title('Змейка')
-screen.tracer(0) # если передаем 0, то будет черный экран, пока не пропишем update для включения экрана
+screen.tracer(0) # если передаем 0, то будет черный экран, пока не пропишем update для обновления экрана, для отрисовки
 screen.listen()
 
 snake = Snake()
