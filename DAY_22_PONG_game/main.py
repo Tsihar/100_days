@@ -3,6 +3,9 @@ from turtle import Turtle
 from turtle import Screen
 from DAY_22_PONG_game.paddles import Paddle
 from DAY_22_PONG_game.ball import Ball
+from DAY_22_PONG_game.scoreboard import Scoreboard
+
+speed = 0.08
 
 screen = Screen()
 screen.setup(800, 600)
@@ -21,10 +24,13 @@ screen.onkey(paddle_right.move_down, "Down")
 screen.onkey(paddle_left.move_up, "w")
 screen.onkey(paddle_left.move_down, "s")
 
+
+scoreboard = Scoreboard()
+
 game_is_on = True
 while game_is_on:
     screen.update()
-    time.sleep(0.08)
+    time.sleep(ball.ball_speed)
     ball.move()
 
     # отскок от стены
@@ -39,8 +45,16 @@ while game_is_on:
         while ball.distance(paddle_right) < 50: # если это не сделать, то шарик троит около ракетки
             ball.move()
             screen.update()
-            time.sleep(0.08)
+            time.sleep(ball.ball_speed)
 
+    # если правая рокетка промахнулась
+    if ball.xcor() > 380:
+        ball.reset_position()
+        scoreboard.count_score_left()
 
+    # если левая рокетка промахнулась
+    if ball.xcor() < -380:
+        ball.reset_position()
+        scoreboard.count_score_right()
 
 screen.exitonclick()
