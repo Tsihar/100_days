@@ -30,7 +30,6 @@ while game_is_on:
         if player.distance(car) < 40 and car.ycor() < 5:
             game_is_on = False
             scoreboard.game_over()
-            time.sleep(3)
 
     # увеличение счетчика на 1, ресет позиции и увеличение скорости
     if player.ycor() >= 290:
@@ -38,3 +37,4 @@ while game_is_on:
         scoreboard.level_up()
         cars.new_speed_level()
 
+screen.exitonclick()
