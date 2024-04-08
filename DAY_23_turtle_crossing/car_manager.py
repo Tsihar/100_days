@@ -24,7 +24,7 @@ class CarManager():
         self.cars.append(car)
 
     def cars_move(self):
-        if random.randint(2, 12) == 5:
+        if random.randint(2, 11) == 5:
             self.create_car()
         for car in self.cars:
                 car.back(self.start_speed)

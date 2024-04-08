@@ -26,12 +26,9 @@ while game_is_on:
 
     # столкновение с машиной
     for car in cars.cars:
-        if player.distance(car) < 25 and car.xcor() < -10:
+        if player.distance(car) < 20:
             game_is_on = False
             scoreboard.game_over()
-            print(player.distance(car))
-            print(car.xcor())
-            print(car.color())
 
 
     # увеличение счетчика на 1, ресет позиции и увеличение скорости
