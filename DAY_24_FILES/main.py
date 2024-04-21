@@ -1,5 +1,4 @@
 import time
-import turtle
 from turtle import *
 
 from DAY_24_FILES.food import Food
