@@ -2,13 +2,20 @@ import pandas as pandas
 
 data = pandas.read_csv("2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv")
 
-color_data = data["Primary Fur Color"]
-# print(color_data)
+gray = data[data["Primary Fur Color"] == "Gray"]
+len_gray = len(gray)
 
-gray_squirrels = 0
-for gray in color_data:
-    if gray == "Gray":
-        gray_squirrels += 1
+cinnamon = data[data["Primary Fur Color"] == "Cinnamon"]
+len_cinnamon = len(cinnamon)
 
-print(gray_squirrels)
+black = data[data["Primary Fur Color"] == "Black"]
+len_black = len(black)
+
+squirrels_data= {
+    "Fur color": ["grey", "cinnamon", "black"],
+    "Count": [len_gray, len_cinnamon, len_black]
+}
+
+new_data = pandas.DataFrame(squirrels_data)
+new_data.to_csv("squirrels_color_count.csv")
 
