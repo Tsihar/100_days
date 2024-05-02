@@ -43,3 +43,11 @@ print(short_names) # Вывод: ['Alex', 'Beth', 'Dave']
 caps_names = [name.upper() for name in names if len(name) >= 5] # name.upper() - имя, попадающее под условие,
 # записывается в список caps_names капсом
 print(caps_names)
+
+# Задание: есть стринга, создать список из стринг, превратить каждый эл-нт списка в число,
+# и добавить только четное число в новый список
+stri = "1, 1, 2, 3, 5, 8, 13, 21, 34, 55"
+list_of_strings = stri.split(',') # разбили по запятой, создав список стринг
+list_of_integers = [int(num) for num in list_of_strings] # добавили в список каждую разбитую стрингу как число
+result = [i for i in list_of_integers if i % 2 == 0] # добавили только четное число в новый список
+print(result)
