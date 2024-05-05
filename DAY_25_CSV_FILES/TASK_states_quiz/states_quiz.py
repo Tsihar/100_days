@@ -20,10 +20,11 @@ while len(guessed_states) < 50:
 
 # если вводим Exit, то создаем файл с неотгаданными штатами
     if answer_state == "Exit":
-        for state in all_states:
-            if state in guessed_states:
-                all_states.remove(state)
-        missed_states = pandas.DataFrame(all_states)
+        states = [state for state in all_states if state not in guessed_states] # формируем список неотгаданных штатов
+        # for state in all_states: # код без list comprehension
+        #     if state in guessed_states:
+        #         all_states.remove(state)
+        missed_states = pandas.DataFrame(states)
         missed_states.to_csv("states_to_learn.csv")
         break
 # если ответ совпадает со штатом из данных csv, то пишем на карте в штате по его координатам его название
