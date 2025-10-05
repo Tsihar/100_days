@@ -72,9 +72,6 @@ window.title('Pomodoro')
 # Настройка отступов по краям окна и установка фонового цвета (значение в переменной YELLOW)
 window.config(padx=100, pady=30, bg=YELLOW)
 
-#
-window.after(ms=1000, )
-
 # Лейбл
 my_label = Label(text="Timer", fg=GREEN, font=(FONT_NAME, 30, "bold"), background=YELLOW)
 my_label.grid(column=1, row=0)
