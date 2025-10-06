@@ -14,7 +14,7 @@ with open("theory_my_file.txt") as file:  # открытие файла прои
 with open("theory_my_file.txt", mode="w") as file:  # по дефолту применяется read, чтоб написать надо "w"
     file.write("I just wrote smth")  # что было ранее терь удалено и записано это
 
-# # 3.1 Если файла нет, он создастся
+# # 3.1 Если файла нет, он создастся, если выбираем режимы 'a' или 'w'
 # with open("theory_new_file1.txt", mode="w") as file:
 #     file.write("New file")
 
@@ -77,4 +77,3 @@ with open("../../../Desktop/absolute_path.txt") as file:
 # след 2 точки наверх еще на одну директорию - в PycharmProjects
 # след 2 точки наверх еще на одну директорию - в 37529
 # и дальше уже идем вниз в папку Desktop (внутри нее наш искомый файл)
-

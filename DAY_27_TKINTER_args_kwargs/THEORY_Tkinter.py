@@ -46,7 +46,7 @@ def get_input():
     my_label.config(text=input.get())
 
 
-input = Entry(width=10) # width сетит ширину поля
+input = Entry(width=10)  # width сетит ширину поля
 input.grid(column=3, row=2)
 # input.pack()
 
