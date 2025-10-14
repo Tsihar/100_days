@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from random import choice, randint, shuffle
 import pyperclip
+import json
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
@@ -32,22 +33,38 @@ def save_pass():
     website = website_input.get()
     email = email_input.get()
     password = psw_input.get()
+    new_data = {
+        website: {
+            "email": email,
+            "password": password
+        }
+    }
 
     if not all([email, password]):
         messagebox.showwarning(title="Warning!", message="Please don't leave any fields empty")
     else:
-        # попап спрашивающий ок или нет сохранить пароль в файл
-        is_ok = messagebox.askokcancel(
-            title=website, message=f"Your email: {email}\nPassword: {password} \nIs it ok for you?")
+        # Читаем json данные из файла
+        with open("data.json", mode="r") as file:  # "r" - читаем json файл/формат
+            data = json.load(fp=file)  # load читает json формат, а точнее преобразует то, что в файле в словарь питона
+            print(data)
 
-        if is_ok:
-            with open("data.txt", mode="a") as file:
-                file.write(f"{website} | {email} | {password}\n")
-                website_input.delete(0, END)
-                email_input.delete(0, END)
-                psw_input.delete(0, END)
-                website_input.focus()
+            # Добавляем к существующим данным новые данные
+            data.update(new_data) # update обновляет json данные
 
+        # Сохраняем обновленные данные в файл
+        with open("data.json", mode="w") as file:  # уже создаем json файл, "w" - записываем в json файл
+            json.dump(obj=data, fp=file, indent=4)  # dump записать данные (new_data) в файл (file) и добавить читабельности (indent=4)
+
+            website_input.delete(0, END)
+            email_input.delete(0, END)
+            psw_input.delete(0, END)
+            website_input.focus()
+
+        # json.load
+        with open("data.json", mode="r") as file:  # "r" - читаем json файл/формат
+            data = json.load(
+                fp=file)  # load читает json формат, а точнее преобразует то, что в файле в словарь питона
+            print(data)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -55,7 +72,7 @@ def save_pass():
 
 window = Tk()  # Создание главного окна приложения с помощью Tkinter
 canvas = Canvas(width=300, height=220)  # Создание холста (Canvas)
-logo_img = PhotoImage(file="../DAY_30_EXCEPTIONS_ERRORS_JSON/logo.png")
+logo_img = PhotoImage(file="logo.png")
 
 window.title('Pass manager')
 window.config(padx=50, pady=50)  # Настройка отступов по краям окна
