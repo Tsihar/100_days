@@ -43,18 +43,23 @@ def save_pass():
     if not all([email, password]):
         messagebox.showwarning(title="Warning!", message="Please don't leave any fields empty")
     else:
-        # Читаем json данные из файла
-        with open("data.json", mode="r") as file:  # "r" - читаем json файл/формат
-            data = json.load(fp=file)  # load читает json формат, а точнее преобразует то, что в файле в словарь питона
+        try:  # Открываем файл
+            with open("data.json", mode="r") as file:
+                data = json.load(fp=file)
+
+        except FileNotFoundError:  # если не нашли файл, то создаем его
+            with open("data.json", mode="w") as file:  # ниже метод повторяется и можно вынести в отдельную функцию
+                json.dump(obj=new_data, fp=file, indent=4)
+                print(new_data)
+
+        else:  # Если файл существует, то добавляем к существующим данным новые
+            data.update(new_data)
             print(data)
 
-            # Добавляем к существующим данным новые данные
-            data.update(new_data) # update обновляет json данные
+            with open("data.json", mode="w") as file:
+                json.dump(obj=data, fp=file, indent=4)
 
-        # Сохраняем обновленные данные в файл
-        with open("data.json", mode="w") as file:  # уже создаем json файл, "w" - записываем в json файл
-            json.dump(obj=data, fp=file, indent=4)  # dump записать данные (new_data) в файл (file) и добавить читабельности (indent=4)
-
+        finally:  # если файл не нашли и записали данные или добавили данные надо все равно почистить поля
             website_input.delete(0, END)
             email_input.delete(0, END)
             psw_input.delete(0, END)
