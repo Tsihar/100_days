@@ -72,7 +72,6 @@ def save_pass():
 
         finally:  # если файл не нашли и записали данные или добавили данные надо все равно почистить поля
             website_input.delete(0, END)
-            email_input.delete(0, END)
             psw_input.delete(0, END)
             website_input.focus()
 
@@ -82,6 +81,9 @@ def save_pass():
 def search_psw():
     try:
         data = read_data(MAIN_FILE_NAME)
+    except FileNotFoundError:
+        messagebox.showwarning(title="No saved passwords", message="Please, create your first password")
+    else:
         site_search = website_input.get()
         search_result = data.get(site_search, None)
         if search_result:
@@ -89,12 +91,10 @@ def search_psw():
                                 message=f"Email: {search_result['email']}\n"
                                         f"Password: {search_result['password']}")
         else:
+
             messagebox.showwarning(title="Please try again", message="No data about the resource")
 
         website_input.delete(0, END)
-    except FileNotFoundError:
-        write_data(MAIN_FILE_NAME, {})
-        search_psw()
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -105,7 +105,7 @@ canvas = Canvas(width=300, height=220)  # Создание холста (Canvas)
 logo_img = PhotoImage(file="logo.png")
 
 window.title('Pass manager')
-window.config(padx=50, pady=50)  # Настройка отступов по краям окна
+window.config(padx=50, pady=70)  # Настройка отступов по краям окна
 canvas.create_image(100, 100, image=logo_img)  # Отображение картинки в центре холста (110, 110)
 canvas.grid(column=1, row=0, columnspan=2)
 
@@ -120,8 +120,8 @@ psw_text = Label(text="Password:", font=("Calibri", 10))
 psw_text.grid(column=0, row=3)
 
 # Entries
-website_input = Entry(width=35)
-website_input.grid(column=1, row=1, columnspan=1, sticky="w")
+website_input = Entry(width=23)
+website_input.grid(column=1, row=1, sticky="w")
 website_input.focus()  # курсор активен в поле при старте
 
 email_input = Entry(width=42)

@@ -33,9 +33,13 @@ finally:
 height = float(input("Height: "))
 weight = int(input("Weight: "))
 
-if height > 3:
-    # с помощью ключевого слова raise
-    raise ValueError("Height should not be over 3 meters.")
-
-bmi = weight / height ** 2
-print(bmi)
+# # Поднятие своих собственных ошибок
+# height = float(input("Height: "))
+# weight = int(input("Weight: "))
+#
+# if height > 3:
+#     # с помощью ключевого слова raise
+#     raise ValueError("Height should not be over 3 meters.")
+#
+# bmi = weight / height ** 2
+# print(bmi)
