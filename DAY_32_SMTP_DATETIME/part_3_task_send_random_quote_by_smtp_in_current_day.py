@@ -12,7 +12,7 @@ yahoo_password = "7789987798"
 
 current_weekday = dt.datetime.now().weekday()
 
-if current_weekday == 1:
+if current_weekday == 3:
     with open(file="quotes.txt", mode="r") as file:
         quotes = file.readlines()
         rand_quote = random.choice(quotes)
