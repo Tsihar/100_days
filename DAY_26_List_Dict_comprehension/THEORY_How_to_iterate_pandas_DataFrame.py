@@ -36,9 +36,9 @@ for (key, value) in student_data_frame.items():
 # !!! так лупить через цикл неудобно, поэтому у пандас для этого свой метод
 # Лупить по строкам
 for (index, row) in student_data_frame.iterrows():
-    # print(index) # выведет имеющиеся индексы
-    # print(row) # выведет имеющиеся строки по одной
-    # print(row.student) # выведет имеющиеся имена студентов в каждой строке
+    print(index) # выведет имеющиеся индексы
+    print(row) # выведет имеющиеся строки по одной
+    print(row.student) # выведет имеющиеся имена студентов в каждой строке
     if row.student == "Angela":
         print(row.score) # Выведет оценку Angela = 56
 # Вывод row:
