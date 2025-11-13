@@ -1,33 +1,60 @@
+import os
 from tkinter import *
+from quiz_brain import QuizBrain
 
 THEME_COLOR = "#375362"
 
 
 class QuizInterFace:
 
-    def __init__(self, question):
-        self.question = question
+    def __init__(self, quiz_brain: QuizBrain):
+        self.quiz = quiz_brain
         self.window = Tk()
         self.window.title("Quizzler")
         self.window.config(padx=20, pady=20, bg=THEME_COLOR)
 
-        self.canvas = Canvas(width=300, height=250)
+        self.canvas = Canvas(width=300, height=250, bg="white")
         self.canvas.grid(column=0, row=1, columnspan=2, pady=50)
 
-        self.true_image = PhotoImage(file="C:/Users/37529/PycharmProjects/100_days/DAY_34_API_PRACTICE_GUI_QUIZ/images/true.png")
-        self.false_image = PhotoImage(file="C:/Users/37529/PycharmProjects/100_days/DAY_34_API_PRACTICE_GUI_QUIZ/images/false.png")
+        self.true_image = PhotoImage(file=f"{os.getcwd()}/images/true.png")
+        self.false_image = PhotoImage(file=f"{os.getcwd()}/images/false.png")
 
-        self.question_text = self.canvas.create_text(140, 130, text=self.question, fill="black", font=("Arial", 15, "italic"))
+        self.question_text = self.canvas.create_text(
+            140, 130, text="question", fill="black", font=("Arial", 15, "italic"), width=280)
 
-        self.score = Label(text=f"Score: 0", fg="white", font=("Arial", 12, "italic"), background=THEME_COLOR)
+        self.score = Label(text="Score: 0", fg="white", font=("Arial", 12, "italic"), background=THEME_COLOR)
         self.score.grid(column=1, row=0)
 
-        self.true_btn = Button(image=self.true_image)
+        self.true_btn = Button(image=self.true_image, command=self.true_pressed)
         self.true_btn.grid(column=0, row=2)
 
-        self.false_btn = Button(image=self.false_image)
+        self.false_btn = Button(image=self.false_image, command=self.false_pressed)
         self.false_btn.grid(column=1, row=2)
 
+        self.get_next_question()
 
         self.window.mainloop()
 
+    def get_next_question(self):
+        self.canvas.config(bg="white")
+        if self.quiz.still_has_questions():
+            self.score.config(text=f"Score: {self.quiz.score}")
+            question_text = self.quiz.next_question()  # чтобы подсвечивало методы QuizBrain надо в init методе указать, что self.quiz имеет тип QuizBrain
+            self.canvas.itemconfig(self.question_text, text=question_text)
+        else:
+            self.score.config(text=f"Score: {self.quiz.score}")
+            self.canvas.itemconfig(self.question_text, text=f"You have completed quiz with score {self.quiz.score}")
+            self.true_btn.config(state="disabled")
+            self.false_btn.config(state="disabled")
+    def true_pressed(self):
+        self.give_feedback(self.quiz.check_answer("True"))
+
+    def false_pressed(self):
+        self.give_feedback(self.quiz.check_answer("False"))
+
+    def give_feedback(self, is_right):
+        if is_right:
+            self.canvas.config(bg="green")
+        else:
+            self.canvas.config(bg="red")
+        self.window.after(1000, self.get_next_question)
