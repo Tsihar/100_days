@@ -83,14 +83,13 @@ print(close_price_yesterday)
 curr_deviation = ((close_price_today - close_price_yesterday)/close_price_yesterday)*100
 deviation_5 = (close_price_yesterday * 5)/100
 
+got_news = get_news()
 if close_price_today > close_price_yesterday + deviation_5:
     print(f"Get News. TSLA raises by {round(curr_deviation, 2)}")
-    got_news = get_news()
     send_email("🔺", round(curr_deviation, 2), got_news)
 
 elif close_price_today < close_price_yesterday - deviation_5:
     print(f"Get News: TSLA lost {round(abs(curr_deviation), 2)}")
-    got_news = get_news()
     send_email("🔻", round(abs(curr_deviation), 2), got_news)
 
 ## STEP 2: Use https://newsapi.org
