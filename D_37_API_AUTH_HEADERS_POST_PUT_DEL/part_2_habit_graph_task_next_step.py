@@ -20,7 +20,7 @@ print(day_strftime)
 
 body = {
     "date": day_strftime,
-    "quantity": "2"
+    "quantity": input("How many kilometers you went today? ")
 }
 
 headers = {
